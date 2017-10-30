@@ -1,0 +1,67 @@
+#!/bin/sh -e
+
+KUBE=`dirname $0`
+MACHINE=${1:-default}
+K8S_VERSION=${2:-v1.8.0}
+PARTNAME=sda1
+
+if [ "`docker-machine status $MACHINE`" != "Running" ]; then
+    echo "machine $MACHINE not running, please create or start it first" >&2
+    exit 1
+fi
+
+check_file()
+{
+if [ ! -e "$1" ]; then
+    echo "file $1 is missing, please use the minikube-download script" >&2
+    exit 1
+fi
+}
+
+check_file $KUBE/bin/kubectl
+check_file $KUBE/bin/minikube
+#check_file $KUBE/localkube/localkube-$K8S_VERSION
+check_file $KUBE/tcz/bash.tcz
+
+echo "# Copying files to $MACHINE"
+docker-machine ssh $MACHINE sudo mkdir -p /mnt/$PARTNAME/home/docker
+  docker-machine ssh $MACHINE sudo chown docker:staff /mnt/$PARTNAME/home/docker
+  docker-machine ssh $MACHINE sudo chmod 2755 /mnt/$PARTNAME/home/docker
+docker-machine scp $KUBE/bin/kubectl $MACHINE:/mnt/$PARTNAME/home/docker/
+docker-machine scp $KUBE/bin/minikube $MACHINE:/mnt/$PARTNAME/home/docker/
+
+docker-machine ssh $MACHINE mkdir -p /mnt/$PARTNAME/home/docker/.kube
+docker-machine ssh $MACHINE touch /mnt/$PARTNAME/home/docker/.kube/config
+docker-machine ssh $MACHINE /bin/sh -c "'echo $K8S_VERSION > /mnt/$PARTNAME/home/docker/.kube/version'" # for minikube start
+docker-machine ssh $MACHINE mkdir -p /mnt/$PARTNAME/home/docker/.minikube/cache/localkube
+docker-machine scp $KUBE/localkube/localkube-$K8S_VERSION $MACHINE:/mnt/$PARTNAME/home/docker/.minikube/cache/localkube/ || true
+
+docker-machine ssh $MACHINE sudo mkdir -p /mnt/$PARTNAME/var/lib/kubelet
+docker-machine ssh $MACHINE sudo mkdir -p /mnt/$PARTNAME/var/lib/localkube
+
+# These directories are used by pod hostpaths and by the hostpath-provisioner storage class
+docker-machine ssh $MACHINE sudo mkdir -p /mnt/$PARTNAME/data
+docker-machine ssh $MACHINE sudo mkdir -p /mnt/$PARTNAME/hostpath_pv
+docker-machine ssh $MACHINE sudo mkdir -p /mnt/$PARTNAME/hostpath-provisioner
+
+docker-machine ssh $MACHINE sudo mkdir -p /mnt/$PARTNAME/tce
+  docker-machine ssh $MACHINE sudo chgrp staff /mnt/$PARTNAME/tce
+  docker-machine ssh $MACHINE sudo chmod 775 /mnt/$PARTNAME/tce
+docker-machine ssh $MACHINE mkdir -p /mnt/$PARTNAME/tce/optional
+
+# Supply the TCL package manager with the tcz packages we need (bash and its dependencies)
+for tcz in $KUBE/tcz/*; do docker-machine scp $tcz $MACHINE:/mnt/$PARTNAME/tce/optional/; done
+
+docker-machine ssh $MACHINE sudo mkdir -p /mnt/$PARTNAME/minikube
+  docker-machine ssh $MACHINE sudo chgrp staff /mnt/$PARTNAME/minikube
+  docker-machine ssh $MACHINE sudo chmod 775 /mnt/$PARTNAME/minikube
+docker-machine scp $KUBE/minikube/minikube-setup $MACHINE:/mnt/$PARTNAME/minikube/setup
+docker-machine scp $KUBE/minikube/minikube-start $MACHINE:/mnt/$PARTNAME/minikube/start
+
+docker-machine ssh $MACHINE sudo /bin/sh -c "'echo /mnt/$PARTNAME/minikube/setup >> /var/lib/boot2docker/bootlocal.sh'"
+docker-machine ssh $MACHINE sudo /bin/sh -c "'echo su docker -c /mnt/$PARTNAME/minikube/start >> /var/lib/boot2docker/bootlocal.sh'"
+
+echo "# Starting minikube in $MACHINE"
+docker-machine ssh $MACHINE sudo /bin/sh /mnt/$PARTNAME/minikube/setup
+docker-machine ssh $MACHINE MINIKUBE_HOME=/mnt/$PARTNAME/home/docker /bin/sh /mnt/$PARTNAME/minikube/start
+

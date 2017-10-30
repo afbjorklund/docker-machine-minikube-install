@@ -2,44 +2,6 @@
 
 *Using a machine to run minikube.*
 
-This sets up a single-node Kubernetes installation, using the regular Boot2Docker ISO.
-
-Tested with minikube version: v0.22.3 (latest) and kubernetes version: v1.8.0 (release)
-
-Written by Anders Björklund (@afbjorklund)
-
-## External URLs ##
-
-Kubernetes
-
-    #KUBERNETES_VERSION=$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)
-    KUBERNETES_VERSION=v1.8.0
-
-``` shell
-curl -Lo minikube https://storage.googleapis.com/minikube/releases/latest/minikube-linux-amd64 && chmod +x minikube
-curl -Lo localkube https://storage.googleapis.com/minikube/k8sReleases/$KUBERNETES_VERSION/localkube-linux-amd64 && chmod +x localkube
-curl -Lo kubectl https://storage.googleapis.com/kubernetes-release/release/$KUBERNETES_VERSION/bin/linux/amd64/kubectl && chmod +x kubectl
-```
-
-* 50M	kubectl
-* 86M	minikube
-* 149M	localkube
-
-Boot2Docker
-
-    # Boot2Docker ISO uses Tiny Core Linux 7.x
-    http://repo.tinycorelinux.net/7.x/x86_64/tcz/
-
-* 348K	tcz/bash.tcz
-* 4.0K	tcz/bash.tcz.dep
-* 4.0K	tcz/bash.tcz.md5.txt
-* 196K	tcz/ncurses.tcz
-* 4.0K	tcz/ncurses.tcz.md5.txt
-* 124K	tcz/readline.tcz
-* 4.0K	tcz/readline.tcz.dep
-* 4.0K	tcz/readline.tcz.md5.txt
-* 688K	total
-
 --------------------------------------------------------------------------------
 
 Creating the machine

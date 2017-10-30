@@ -1,0 +1,26 @@
+#!/bin/sh
+
+#MK_VERSION=latest
+MK_VERSION=v0.23.0
+
+#K8S_VERSION=${1:-`curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt`}
+K8S_VERSION=v1.8.0
+
+
+mkdir -p bin
+curl -RLo bin/minikube https://storage.googleapis.com/minikube/releases/$MK_VERSION/minikube-linux-amd64 && chmod +x bin/minikube
+curl -RLo bin/kubectl https://storage.googleapis.com/kubernetes-release/release/${K8S_VERSION}/bin/linux/amd64/kubectl && chmod +x bin/kubectl
+
+localkube=localkube/localkube-${K8S_VERSION}
+mkdir -p localkube
+curl -RLo $localkube https://storage.googleapis.com/minikube/k8sReleases/${K8S_VERSION}/localkube-linux-amd64 && chmod +x $localkube
+
+# docker-machine ssh tce-load -w bash.tcz
+for tcz in bash.tcz readline.tcz ncurses.tcz; do
+     curl -RLo tcz/$tcz http://repo.tinycorelinux.net/7.x/x86_64/tcz/$tcz; done
+
+
+sha256sum -c SHA256SUM.txt
+
+( cd tcz && md5sum -c *.md5.txt )
+

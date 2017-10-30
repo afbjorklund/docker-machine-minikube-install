@@ -1,0 +1,20 @@
+#!/bin/sh
+
+PARTNAME=sda1
+
+ln -s /mnt/$PARTNAME/home/docker/kubectl /home/docker/kubectl
+ln -s /mnt/$PARTNAME/home/docker/.kube /home/docker/.kube
+ln -s /mnt/$PARTNAME/home/docker/minikube /home/docker/minikube
+ln -s /mnt/$PARTNAME/home/docker/.minikube /home/docker/.minikube
+
+ln -s /mnt/$PARTNAME/home/docker/kubectl /usr/local/bin/kubectl
+ln -s /mnt/$PARTNAME/var/lib/kubelet /var/lib/kubelet
+ln -s /mnt/$PARTNAME/home/docker/minikube /usr/local/bin/minikube
+ln -s /mnt/$PARTNAME/var/lib/localkube /var/lib/localkube
+
+test -d /data || ln -s /mnt/$PARTNAME/data /data
+
+ln -s /mnt/$PARTNAME/hostpath_pv /tmp/
+ln -s /mnt/$PARTNAME/hostpath-provisioner /tmp/
+
+cp /mnt/$PARTNAME/tce/optional/* /tmp/tce/optional/

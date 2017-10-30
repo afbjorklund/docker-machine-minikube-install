@@ -1,0 +1,10 @@
+#!/bin/sh
+
+tce-load -i bash.tcz
+
+export MINIKUBE_WANTUPDATENOTIFICATION=false
+export MINIKUBE_WANTREPORTERRORPROMPT=false
+export MINIKUBE_HOME=${MINIKUBE_HOME:-$HOME}
+export CHANGE_MINIKUBE_NONE_USER=true
+sudo -E minikube start --vm-driver=none \
+	--kubernetes-version=`cat ~/.kube/version`

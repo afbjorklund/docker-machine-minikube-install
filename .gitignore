@@ -1,0 +1,4 @@
+bin/kubectl
+bin/minikube
+localkube/
+tcz/*.tcz

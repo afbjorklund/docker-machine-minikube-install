@@ -1,0 +1,1 @@
+63514bcc8e1de8ee97c71b97de27333d  ncurses.tcz
