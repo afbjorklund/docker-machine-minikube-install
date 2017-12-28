@@ -33,6 +33,8 @@ curl -Lo kubectl https://storage.googleapis.com/kubernetes-release/release/$KUBE
 
 ### Boot2Docker
 
+The minikube installation scripts need bash (not just /bin/sh), so make sure that it is installed.
+
     # Boot2Docker ISO uses Tiny Core Linux 7.x
     http://repo.tinycorelinux.net/7.x/x86_64/tcz/
 
