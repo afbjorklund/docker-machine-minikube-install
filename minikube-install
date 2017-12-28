@@ -21,6 +21,7 @@ fi
 check_file $KUBE/bin/kubectl
 check_file $KUBE/bin/minikube
 #check_file $KUBE/localkube/localkube-$K8S_VERSION
+#check_file $KUBE/localkube/localkube-$K8S_VERSION.sha256
 check_file $KUBE/tcz/bash.tcz
 
 echo "# Copying files to $MACHINE"
@@ -35,6 +36,7 @@ docker-machine ssh $MACHINE touch /mnt/$PARTNAME/home/docker/.kube/config
 docker-machine ssh $MACHINE /bin/sh -c "'echo $K8S_VERSION > /mnt/$PARTNAME/home/docker/.kube/version'" # for minikube start
 docker-machine ssh $MACHINE mkdir -p /mnt/$PARTNAME/home/docker/.minikube/cache/localkube
 docker-machine scp $KUBE/localkube/localkube-$K8S_VERSION $MACHINE:/mnt/$PARTNAME/home/docker/.minikube/cache/localkube/ || true
+docker-machine scp $KUBE/localkube/localkube-$K8S_VERSION.sha256 $MACHINE:/mnt/$PARTNAME/home/docker/.minikube/cache/localkube/ || true
 
 docker-machine ssh $MACHINE sudo mkdir -p /mnt/$PARTNAME/var/lib/kubelet
 docker-machine ssh $MACHINE sudo mkdir -p /mnt/$PARTNAME/var/lib/localkube

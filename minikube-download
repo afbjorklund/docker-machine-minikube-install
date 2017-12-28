@@ -14,6 +14,7 @@ curl -RLo bin/kubectl https://storage.googleapis.com/kubernetes-release/release/
 localkube=localkube/localkube-${K8S_VERSION}
 mkdir -p localkube
 curl -RLo $localkube https://storage.googleapis.com/minikube/k8sReleases/${K8S_VERSION}/localkube-linux-amd64 && chmod +x $localkube
+curl -RLo $localkube.sha256 https://storage.googleapis.com/minikube/k8sReleases/${K8S_VERSION}/localkube-linux-amd64.sha256
 
 # docker-machine ssh tce-load -w bash.tcz
 for tcz in bash.tcz readline.tcz ncurses.tcz; do
