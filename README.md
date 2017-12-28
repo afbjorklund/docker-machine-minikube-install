@@ -2,7 +2,7 @@
 
 This sets up a single-node Kubernetes installation, using the regular Boot2Docker ISO.
 
-Tested with minikube version: v0.23.0 (latest) and kubernetes version: v1.8.0 (release)
+Tested with minikube version: v0.24.0 (latest) and kubernetes version: v1.8.0 (stable)
 
 Written by Anders Björklund (@afbjorklund)
 
