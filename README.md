@@ -16,8 +16,10 @@ See https://github.com/kubernetes/minikube
 
 ### Kubernetes
 
-    MINIKUBE_VERSION=latest
-    KUBERNETES_VERSION=$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)
+There are no localkube versions provided after 1.8.0, since it is deprecated for kubernetes 1.9.0.
+
+    MINIKUBE_VERSION=0.24.0 # latest
+    KUBERNETES_VERSION=v1.8.0 # $(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)
 
 ``` shell
 curl -Lo minikube https://storage.googleapis.com/minikube/releases/$MINIKUBE_VERSION/minikube-linux-amd64 && chmod +x minikube
