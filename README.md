@@ -14,6 +14,14 @@ The entire minikube installation procedure looks something like this: [machine-m
 
 See https://github.com/kubernetes/minikube
 
+## Requirements ##
+
+It is _possible_ to install using the default 1 vCPU / 1G RAM, but 2 vCPU / 2G RAM is recommended.
+
+The default installation is around 1G, but more disk space might be needed for swap and overhead.
+
+Total download is around 250M, plus images.
+
 ### Kubernetes
 
 There are no localkube versions provided after 1.8.0, since it is deprecated for kubernetes 1.9.0.
