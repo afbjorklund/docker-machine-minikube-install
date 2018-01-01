@@ -60,8 +60,9 @@ docker-machine ssh $MACHINE sudo mkdir -p /mnt/$PARTNAME/minikube
 docker-machine scp $KUBE/minikube/minikube-setup $MACHINE:/mnt/$PARTNAME/minikube/setup
 docker-machine scp $KUBE/minikube/minikube-start $MACHINE:/mnt/$PARTNAME/minikube/start
 
-docker-machine ssh $MACHINE sudo /bin/sh -c "'echo /mnt/$PARTNAME/minikube/setup >> /var/lib/boot2docker/bootlocal.sh'"
-docker-machine ssh $MACHINE sudo /bin/sh -c "'echo su docker -c /mnt/$PARTNAME/minikube/start >> /var/lib/boot2docker/bootlocal.sh'"
+# Add the setup and start scripts to the boot2docker bootlocal script, if not already present
+docker-machine ssh $MACHINE sudo /bin/sh -c "'grep minikube/setup /var/lib/boot2docker/bootlocal.sh >/dev/null 2>&1 || echo /mnt/$PARTNAME/minikube/setup >> /var/lib/boot2docker/bootlocal.sh'"
+docker-machine ssh $MACHINE sudo /bin/sh -c "'grep minikube/start /var/lib/boot2docker/bootlocal.sh >/dev/null 2>&1 || echo su docker -c /mnt/$PARTNAME/minikube/start >> /var/lib/boot2docker/bootlocal.sh'"
 
 echo "# Starting minikube in $MACHINE"
 docker-machine ssh $MACHINE sudo /bin/sh /mnt/$PARTNAME/minikube/setup
