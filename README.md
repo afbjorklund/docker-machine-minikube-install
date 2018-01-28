@@ -49,3 +49,8 @@ The minikube installation scripts need bash (not just /bin/sh), so make sure tha
 * 196K	ncurses.tcz
 * 124K	readline.tcz
 
+Certain addons, like `helm`, also requires that `socat` and `nsenter` (from util-linux) are available.
+
+* 2.1M	openssl.tcz
+* 152K	socat.tcz
+* 1.1M	util-linux.tcz

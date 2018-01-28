@@ -1,6 +1,8 @@
 #!/bin/sh
 
 tce-load -i bash.tcz
+tce-load -i socat.tcz
+tce-load -i util-linux.tcz
 
 export MINIKUBE_WANTUPDATENOTIFICATION=false
 export MINIKUBE_WANTREPORTERRORPROMPT=false

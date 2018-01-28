@@ -23,6 +23,8 @@ check_file $KUBE/bin/minikube
 #check_file $KUBE/localkube/localkube-$K8S_VERSION
 #check_file $KUBE/localkube/localkube-$K8S_VERSION.sha256
 check_file $KUBE/tcz/bash.tcz
+check_file $KUBE/tcz/socat.tcz
+check_file $KUBE/tcz/util-linux.tcz
 
 echo "# Copying files to $MACHINE"
 docker-machine ssh $MACHINE sudo mkdir -p /mnt/$PARTNAME/home/docker

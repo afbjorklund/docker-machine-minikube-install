@@ -16,8 +16,8 @@ mkdir -p localkube
 curl -RLo $localkube https://storage.googleapis.com/minikube/k8sReleases/${K8S_VERSION}/localkube-linux-amd64 && chmod +x $localkube
 curl -RLo $localkube.sha256 https://storage.googleapis.com/minikube/k8sReleases/${K8S_VERSION}/localkube-linux-amd64.sha256
 
-# docker-machine ssh tce-load -w bash.tcz
-for tcz in bash.tcz readline.tcz ncurses.tcz; do
+# docker-machine ssh tce-load -w bash.tcz socat.tcz util-linux.tcz
+for tcz in bash.tcz readline.tcz ncurses.tcz openssl.tcz socat.tcz util-linux.tcz; do
      curl -RLo tcz/$tcz http://repo.tinycorelinux.net/7.x/x86_64/tcz/$tcz; done
 
 
