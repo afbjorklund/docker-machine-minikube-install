@@ -1,10 +1,10 @@
 #!/bin/sh
 
 #MK_VERSION=latest
-MK_VERSION=v0.24.0
+MK_VERSION=v0.25.0
 
 #K8S_VERSION=${1:-`curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt`}
-K8S_VERSION=v1.8.0
+K8S_VERSION=v1.9.0
 
 
 mkdir -p bin

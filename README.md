@@ -2,7 +2,7 @@
 
 This sets up a single-node Kubernetes installation, using the regular Boot2Docker ISO.
 
-Tested with minikube version: v0.24.0 (latest) and kubernetes version: v1.8.0 (stable)
+Tested with minikube version: v0.25.0 (latest) and kubernetes version: v1.9.0 (stable)
 
 Written by Anders Björklund (@afbjorklund)
 
@@ -20,14 +20,12 @@ It is _possible_ to install using the default 1 vCPU / 1G RAM, but 2 vCPU / 2G R
 
 The default installation is around 1G, but more disk space might be needed for swap and overhead.
 
-Total download is around 250M, plus images.
+Total download is around 270M, plus the container images.
 
 ### Kubernetes
 
-There are no localkube versions provided after 1.8.0, since it is deprecated for kubernetes 1.9.0.
-
-    MINIKUBE_VERSION=0.24.0 # latest
-    KUBERNETES_VERSION=v1.8.0 # $(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)
+    MINIKUBE_VERSION=0.25.0 # latest
+    KUBERNETES_VERSION=v1.9.0 # $(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)
 
 ``` shell
 curl -Lo minikube https://storage.googleapis.com/minikube/releases/$MINIKUBE_VERSION/minikube-linux-amd64 && chmod +x minikube
@@ -35,9 +33,10 @@ curl -Lo localkube https://storage.googleapis.com/minikube/k8sReleases/$KUBERNET
 curl -Lo kubectl https://storage.googleapis.com/kubernetes-release/release/$KUBERNETES_VERSION/bin/linux/amd64/kubectl && chmod +x kubectl
 ```
 
-* 50M	kubectl
-* 40M	minikube
-* 149M	localkube
+* 65M	kubectl
+* 42M	minikube
+* 163M	localkube
+
 
 ### Boot2Docker
 
