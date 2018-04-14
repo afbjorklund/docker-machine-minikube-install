@@ -14,8 +14,10 @@ ln -s /mnt/$PARTNAME/var/lib/localkube /var/lib/localkube
 
 test -d /data || ln -s /mnt/$PARTNAME/data /data
 
-ln -s /mnt/$PARTNAME/hostpath_pv /tmp/
-ln -s /mnt/$PARTNAME/hostpath-provisioner /tmp/
+mkdir /tmp/hostpath_pv
+mount --bind /mnt/$PARTNAME/hostpath_pv /tmp/hostpath_pv
+mkdir /tmp/hostpath-provisioner
+mount --bind /mnt/$PARTNAME/hostpath-provisioner /tmp/hostpath-provisioner
 
 cp /mnt/$PARTNAME/tce/optional/* /tmp/tce/optional/
 

@@ -46,7 +46,9 @@ docker-machine ssh $MACHINE sudo mkdir -p /mnt/$PARTNAME/var/lib/localkube
 # These directories are used by pod hostpaths and by the hostpath-provisioner storage class
 docker-machine ssh $MACHINE sudo mkdir -p /mnt/$PARTNAME/data
 docker-machine ssh $MACHINE sudo mkdir -p /mnt/$PARTNAME/hostpath_pv
+  docker-machine ssh $MACHINE sudo chmod 777 /mnt/$PARTNAME/hostpath_pv
 docker-machine ssh $MACHINE sudo mkdir -p /mnt/$PARTNAME/hostpath-provisioner
+  docker-machine ssh $MACHINE sudo chmod 777 /mnt/$PARTNAME/hostpath-provisioner
 
 docker-machine ssh $MACHINE sudo mkdir -p /mnt/$PARTNAME/tce
   docker-machine ssh $MACHINE sudo chgrp staff /mnt/$PARTNAME/tce
