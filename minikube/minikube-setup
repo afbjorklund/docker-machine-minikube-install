@@ -18,3 +18,7 @@ ln -s /mnt/$PARTNAME/hostpath_pv /tmp/
 ln -s /mnt/$PARTNAME/hostpath-provisioner /tmp/
 
 cp /mnt/$PARTNAME/tce/optional/* /tmp/tce/optional/
+
+# https://github.com/kubernetes/kubernetes/pull/61126
+mount --make-rshared /
+/etc/init.d/docker restart
