@@ -9,6 +9,8 @@ export MINIKUBE_WANTREPORTERRORPROMPT=false
 export MINIKUBE_WANTNONEDRIVERWARNING=false
 export MINIKUBE_HOME=${MINIKUBE_HOME:-$HOME}
 export CHANGE_MINIKUBE_NONE_USER=true
+minikube config set ShowBootstrapperDeprecationNotification false
 sudo -E minikube start --vm-driver=none \
+	--bootstrapper=localkube \
 	--apiserver-ips=127.0.0.1 \
 	--kubernetes-version=`cat ~/.kube/version`

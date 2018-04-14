@@ -2,7 +2,7 @@
 
 This sets up a single-node Kubernetes installation, using the regular Boot2Docker ISO.
 
-Tested with minikube version: v0.25.0 (latest) and kubernetes version: v1.9.0 (stable)
+Tested with minikube version: v0.26.0 (latest) and kubernetes version: v1.10.0 (stable)
 
 Written by Anders Björklund (@afbjorklund)
 
@@ -24,8 +24,8 @@ Total download is around 270M, plus the container images.
 
 ### Kubernetes
 
-    MINIKUBE_VERSION=0.25.0 # latest
-    KUBERNETES_VERSION=v1.9.0 # $(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)
+    MINIKUBE_VERSION=0.26.0 # latest
+    KUBERNETES_VERSION=v1.10.0 # $(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)
 
 ``` shell
 curl -Lo minikube https://storage.googleapis.com/minikube/releases/$MINIKUBE_VERSION/minikube-linux-amd64 && chmod +x minikube
@@ -33,9 +33,9 @@ curl -Lo localkube https://storage.googleapis.com/minikube/k8sReleases/$KUBERNET
 curl -Lo kubectl https://storage.googleapis.com/kubernetes-release/release/$KUBERNETES_VERSION/bin/linux/amd64/kubectl && chmod +x kubectl
 ```
 
-* 65M	kubectl
-* 42M	minikube
-* 163M	localkube
+* 52M	kubectl
+* 41M	minikube
+* 174M	localkube
 
 
 ### Boot2Docker
