@@ -14,8 +14,10 @@ ln -s /mnt/$PARTNAME/var/lib/localkube /var/lib/localkube
 
 test -d /data || ln -s /mnt/$PARTNAME/data /data
 
+test -L /tmp/hostpath_pv && rm /tmp/hostpath_pv
 mkdir /tmp/hostpath_pv
 mount --bind /mnt/$PARTNAME/hostpath_pv /tmp/hostpath_pv
+test -L /tmp/hostpath-provisioner && rm /tmp/hostpath-provisioner
 mkdir /tmp/hostpath-provisioner
 mount --bind /mnt/$PARTNAME/hostpath-provisioner /tmp/hostpath-provisioner
 
