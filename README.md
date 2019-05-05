@@ -1,3 +1,13 @@
+# DEPRECATED
+
+_The "**localkube**" bootstrapper for Minikube has not been updated since [k8s](https://kubernetes.io) -1.10 (2018)._
+_Instead it is now using the official Kubernetes "**kubeadm**" bootstrapper, and up to 1.14_
+
+_If you want an installation like this one with a smaller footprint, look at [k3s](https://k3s.io) 1.13+ (2019)._
+_It can be used both with **Docker Machine** ([containerd](https://containerd.io/)) or with **Podman Machine** ([cri-o](https://cri-o.io/))_
+
+---
+
 # Docker Machine - Kubernetes Minikube #
 
 This sets up a single-node Kubernetes installation, using the regular Boot2Docker ISO.
